@@ -149,24 +149,6 @@ int process_tcp(u_char *userdata, const dp_header *header,
   if (connection != NULL) {
     /* add packet to the connection */
     connection->add(packet);
-
-     // 打印
-        std::cout<< " con != null ip port:" <<packet->gethashstring();
-        unsigned long inode = conninode[connection->refpacket->gethashstring()];
-        Process *proc = findProcess(inode);
-        if( proc ){
-            if(proc->cmdline){
-                std::cout<<"cmdline;;"<<proc->cmdline;
-            }
-            else{
-             std::cout<<"cmdline;; ";
-            }
-
-            std::cout<<" name;;"<<proc->name;
-            std::cout<<" pid;;"<<proc->pid ;
-            std::cout<<" devicename;;"<<proc->devicename;
-            std::cout<<std::endl<<std::endl;
-        }
   } else {
     /* else: unknown connection, create new */
     connection = new Connection(packet);

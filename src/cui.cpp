@@ -533,7 +533,7 @@ void do_refresh_add() {
             */
             curr_conn = curr_conn->getNext();
         }
-
+    std::cout<<std::endl;
     //std::cout<<std::endl<<" one page"<<std::endl<<std::endl;
     curproc = curproc->next;
     n++;

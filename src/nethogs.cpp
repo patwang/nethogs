@@ -171,6 +171,9 @@ int process_tcp(u_char *userdata, const dp_header *header,
         std::cout<<" devicename;;"<<proc->devicename;
          std::cout<<std::endl<<std::endl;
     }
+    else{
+        std::cout<<"no proc"<<std::endl;
+    }
 
   }
   delete packet;

@@ -502,9 +502,7 @@ void do_refresh_add() {
 
 
     if(curproc->getVal()->cmdline){
-
-
- std::cout<<" cmdline:"<<curproc->getVal()->cmdline;
+        std::cout<<" cmdline:"<<curproc->getVal()->cmdline;
     }
 
         std::cout<<" name:"<<curproc->getVal()->name;
@@ -514,7 +512,14 @@ void do_refresh_add() {
         std::cout<<" devicename:"<<curproc->getVal()->devicename<<std::endl;
 
 
-    std::cout<<" one page"<<std::endl<<std::endl;
+        ConnList *curr_conn = curproc->getVal()->connections;
+        while (curr_conn != NULL) {
+
+           std::cout<<"   "<<curr_conn->getVal()->refpacket->gethashstring()<<"  ";
+           curr_conn = curr_conn->getNext();
+        }
+
+    std::cout<<std::endl<<" one page"<<std::endl<<std::endl;
     curproc = curproc->next;
     n++;
   }

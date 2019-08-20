@@ -197,7 +197,7 @@ int main(int argc, char **argv) {
                      "loopback interfaces or devices that are not up/running");
 
   if ((!tracemode) && (!DEBUG)) {
-    init_ui();
+    //init_ui();
   }
 
   if (geteuid() != 0) {
@@ -321,7 +321,7 @@ int main(int argc, char **argv) {
         // handle user input
         ui_tick();
       }
-      do_refresh();
+      do_refresh_add();
     }
 
     // if not packets, do a select() until next packet

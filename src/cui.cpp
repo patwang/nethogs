@@ -446,3 +446,75 @@ void do_refresh() {
   if (refreshlimit != 0 && refreshcount >= refreshlimit)
     quit_cb(0);
 }
+
+
+// Display all processes and relevant network traffic using show function
+void do_refresh_add() {
+  refreshconninode();
+  refreshcount++;
+
+  if (viewMode == VIEWMODE_KBPS || viewMode == VIEWMODE_MBPS ||
+      viewMode == VIEWMODE_GBPS) {
+    remove_timed_out_processes();
+  }
+
+  ProcList *curproc = processes;
+  int nproc = processes->size();
+
+  /* initialize to null pointers */
+  Line *lines[nproc];
+  for (int i = 0; i < nproc; i++)
+    lines[i] = NULL;
+
+  int n = 0;
+
+  while (curproc != NULL) {
+    // walk though its connections, summing up their data, and
+    // throwing away connections that haven't received a package
+    // in the last CONNTIMEOUT seconds.
+    assert(curproc->getVal() != NULL);
+    assert(nproc == processes->size());
+
+    float value_sent = 0, value_recv = 0;
+
+    if (viewMode == VIEWMODE_KBPS) {
+      curproc->getVal()->getkbps(&value_recv, &value_sent);
+    } else if (viewMode == VIEWMODE_MBPS) {
+      curproc->getVal()->getmbps(&value_recv, &value_sent);
+    } else if (viewMode == VIEWMODE_GBPS) {
+      curproc->getVal()->getgbps(&value_recv, &value_sent);
+    } else if (viewMode == VIEWMODE_TOTAL_KB) {
+      curproc->getVal()->gettotalkb(&value_recv, &value_sent);
+    } else if (viewMode == VIEWMODE_TOTAL_MB) {
+      curproc->getVal()->gettotalmb(&value_recv, &value_sent);
+    } else if (viewMode == VIEWMODE_TOTAL_B) {
+      curproc->getVal()->gettotalb(&value_recv, &value_sent);
+    } else {
+      forceExit(false, "Invalid viewMode: %d", viewMode);
+    }
+    uid_t uid = curproc->getVal()->getUid();
+    assert(curproc->getVal()->pid >= 0);
+    assert(n < nproc);
+
+    lines[n] = new Line(curproc->getVal()->name, curproc->getVal()->cmdline,
+                        value_recv, value_sent, curproc->getVal()->pid, uid,
+                        curproc->getVal()->devicename);
+
+    std::cout<<" name:"<<curproc->getVal()->name;
+    if(curproc->getVal()->cmdline){
+        std::cout<<" cmdline:"<<curproc->getVal()->cmdline;
+    }
+
+     std::cout<<" recv:"<<value_recv <<" send:"<<value_sent;
+     std::cout<<" pid:"<<curproc->getVal()->pid <<" uid:"<<uid;
+     std::cout<<" devicename:"<<curproc->getVal()->devicename<<std::endl;
+
+
+
+    std::cout<<" one page"<<std::endl<<std::endl;
+    curproc = curproc->next;
+    n++;
+  }
+
+
+}

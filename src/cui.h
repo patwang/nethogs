@@ -23,6 +23,7 @@
 /* NetHogs console UI */
 
 void do_refresh();
+void do_refresh_add();
 void init_ui();
 void exit_ui();
 

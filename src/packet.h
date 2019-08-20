@@ -74,6 +74,7 @@ public:
   bool matchSource(Packet *other);
   /* returns '1.2.3.4:5-1.2.3.4:6'-style string */
   char *gethashstring();
+  unsigned long long  getTimeSeconds(){return time.tv_sec;}
 
 private:
   direction dir;

@@ -518,6 +518,7 @@ void do_refresh_add() {
         ConnList *curr_conn = curproc->getVal()->connections;
         while (curr_conn != NULL) {
             std::cout<<" refer;;"<<curr_conn->getVal()->refpacket->gethashstring();
+            std::cout<<" time;;"<<curr_conn->getVal()->refpacket->getTimeSeconds();
           /*  std::cout<<std::endl<<"send pack:"<<std::endl;
             PackListNode *curr_pack=curr_conn->getVal()->sent_packets->content;
             while(curr_pack != NULL){

@@ -165,6 +165,7 @@ int process_tcp(u_char *userdata, const dp_header *header,
             std::cout<<" name;;"<<proc->name;
             std::cout<<" pid;;"<<proc->pid ;
             std::cout<<" devicename;;"<<proc->devicename;
+            std::cout<<std::endl<<std::endl;
         }
   } else {
     /* else: unknown connection, create new */
@@ -186,6 +187,7 @@ int process_tcp(u_char *userdata, const dp_header *header,
         std::cout<<" name;;"<<proc->name;
         std::cout<<" pid;;"<<proc->pid ;
         std::cout<<" devicename;;"<<proc->devicename;
+         std::cout<<std::endl<<std::endl;
     }
 
   }

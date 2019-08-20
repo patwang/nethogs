@@ -32,6 +32,7 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include <map>
 
 #include <netinet/ip.h>
 #include <netinet/ip6.h>
@@ -50,6 +51,7 @@ extern "C" {
 #include "process.h"
 
 extern Process *unknownudp;
+extern std::map<std::string, unsigned long> conninode;
 
 time_t refreshdelay = 1;
 unsigned refreshlimit = 0;
@@ -151,6 +153,24 @@ int process_tcp(u_char *userdata, const dp_header *header,
     /* else: unknown connection, create new */
     connection = new Connection(packet);
     getProcess(connection, args->device);
+
+    // 打印
+    std::cout<< "ip port:" <<packet->gethashstring();
+    unsigned long inode = conninode[connection->refpacket->gethashstring()];
+    Process *proc = findProcess(inode);
+    if( proc ){
+        if(proc->cmdline){
+            std::cout<<"cmdline;;"<<proc->cmdline;
+        }
+        else{
+         std::cout<<"cmdline;; ";
+        }
+
+        std::cout<<" name;;"<<proc->name;
+        std::cout<<" pid;;"<<proc->pid ;
+        std::cout<<" devicename;;"<<proc->devicename;
+    }
+
   }
   delete packet;
 

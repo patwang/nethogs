@@ -458,6 +458,7 @@ void do_refresh_add() {
     remove_timed_out_processes();
   }
 
+  return ;
   ProcList *curproc = processes;
   int nproc = processes->size();
 
@@ -497,7 +498,7 @@ void do_refresh_add() {
     assert(n < nproc);
 
 
-    if( value_sent>0 && curproc->getVal()->pid>0){
+    if( value_sent>0 ){
         if(curproc->getVal()->cmdline){
                std::cout<<"cmdline;;"<<curproc->getVal()->cmdline;
            }

@@ -155,7 +155,7 @@ int process_tcp(u_char *userdata, const dp_header *header,
     getProcess(connection, args->device);
 
     // 打印
-    std::cout<< " con == null ip port:" <<packet->gethashstring();
+    std::cout<< " con == null tcp ip port:" <<packet->gethashstring();
     unsigned long inode = conninode[connection->refpacket->gethashstring()];
     Process *proc = findProcess(inode);
     if( proc ){
@@ -228,6 +228,27 @@ int process_udp(u_char *userdata, const dp_header *header,
     connection = new Connection(packet);
     unknownudp->connections = new ConnList(connection, unknownudp->connections);
     // getProcess(connection, args->device);
+
+    // 打印
+        std::cout<< " con == null udp ip port:" <<packet->gethashstring();
+        unsigned long inode = conninode[connection->refpacket->gethashstring()];
+        Process *proc = findProcess(inode);
+        if( proc ){
+            if(proc->cmdline){
+                std::cout<<"cmdline;;"<<proc->cmdline;
+            }
+            else{
+             std::cout<<"cmdline;; ";
+            }
+
+            std::cout<<" name;;"<<proc->name;
+            std::cout<<" pid;;"<<proc->pid ;
+            std::cout<<" devicename;;"<<proc->devicename;
+             std::cout<<std::endl<<std::endl;
+        }
+        else{
+            std::cout<<"no proc"<<std::endl;
+        }
   }
   delete packet;
 

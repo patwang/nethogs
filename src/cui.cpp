@@ -502,21 +502,23 @@ void do_refresh_add() {
 
 
     if(curproc->getVal()->cmdline){
-        std::cout<<" cmdline:"<<curproc->getVal()->cmdline;
+        std::cout<<"cmdline;;"<<curproc->getVal()->cmdline;
+    }
+    else{
+        std::cout<<"cmdline;; ";
     }
 
-        std::cout<<" name:"<<curproc->getVal()->name;
+        std::cout<<" name;;"<<curproc->getVal()->name;
 
-        std::cout<<" recv:"<<value_recv <<" send:"<<value_sent;
-        std::cout<<" pid:"<<curproc->getVal()->pid <<" uid:"<<uid;
-        std::cout<<" devicename:"<<curproc->getVal()->devicename<<std::endl;
+        std::cout<<" recv;;"<<value_recv <<" send;;"<<value_sent;
+        std::cout<<" pid;;"<<curproc->getVal()->pid <<" uid;;"<<uid;
+        std::cout<<" devicename;;"<<curproc->getVal()->devicename;
 
 
         ConnList *curr_conn = curproc->getVal()->connections;
         while (curr_conn != NULL) {
-
-            std::cout<<"refer:   "<<curr_conn->getVal()->refpacket->gethashstring();
-            std::cout<<std::endl<<"send pack:"<<std::endl;
+            std::cout<<" refer;;"<<curr_conn->getVal()->refpacket->gethashstring();
+          /*  std::cout<<std::endl<<"send pack:"<<std::endl;
             PackListNode *curr_pack=curr_conn->getVal()->sent_packets->content;
             while(curr_pack != NULL){
                 std::cout<<":   "<<curr_pack->val->gethashstring()<<" ";
@@ -528,11 +530,11 @@ void do_refresh_add() {
                 std::cout<<":   "<<curr_rpack->val->gethashstring()<<" ";
                 curr_rpack = curr_rpack->next;
             }
-
+            */
             curr_conn = curr_conn->getNext();
         }
 
-    std::cout<<std::endl<<" one page"<<std::endl<<std::endl;
+    //std::cout<<std::endl<<" one page"<<std::endl<<std::endl;
     curproc = curproc->next;
     n++;
   }

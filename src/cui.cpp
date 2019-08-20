@@ -502,15 +502,16 @@ void do_refresh_add() {
 
 
     if(curproc->getVal()->cmdline){
+
+
+ std::cout<<" cmdline:"<<curproc->getVal()->cmdline;
+    }
+
         std::cout<<" name:"<<curproc->getVal()->name;
-        std::cout<<" cmdline:"<<curproc->getVal()->cmdline;
+
         std::cout<<" recv:"<<value_recv <<" send:"<<value_sent;
         std::cout<<" pid:"<<curproc->getVal()->pid <<" uid:"<<uid;
         std::cout<<" devicename:"<<curproc->getVal()->devicename<<std::endl;
-
-
-    }
-
 
 
     std::cout<<" one page"<<std::endl<<std::endl;

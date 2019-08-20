@@ -515,8 +515,21 @@ void do_refresh_add() {
         ConnList *curr_conn = curproc->getVal()->connections;
         while (curr_conn != NULL) {
 
-           std::cout<<"   "<<curr_conn->getVal()->refpacket->gethashstring()<<"  ";
-           curr_conn = curr_conn->getNext();
+            std::cout<<"refer:   "<<curr_conn->getVal()->refpacket->gethashstring();
+            std::cout<<std::endl<<"send pack:"<<std::endl;
+            PackListNode *curr_pack=curr_conn->getVal()->sent_packets->content;
+            while(curr_pack != NULL){
+                std::cout<<":   "<<curr_pack->val->gethashstring()<<" ";
+                curr_pack = curr_pack->next;
+            }
+            std::cout<<std::endl<<"recv pack:"<<std::endl;
+            PackListNode *curr_rpack=curr_conn->getVal()->recv_packets->content;
+            while(curr_rpack != NULL){
+                std::cout<<":   "<<curr_rpack->val->gethashstring()<<" ";
+                curr_rpack = curr_rpack->next;
+            }
+
+            curr_conn = curr_conn->getNext();
         }
 
     std::cout<<std::endl<<" one page"<<std::endl<<std::endl;

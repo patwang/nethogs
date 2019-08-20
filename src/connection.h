@@ -58,7 +58,7 @@ public:
   /* calling code may delete packet */
   void add(Packet *p);
 
-private:
+//private:
   PackListNode *content;
 };
 
@@ -93,7 +93,7 @@ public:
   u_int64_t sumSent;
   u_int64_t sumRecv;
 
-private:
+//private:
   PackList *sent_packets;
   PackList *recv_packets;
   int lastpacket;

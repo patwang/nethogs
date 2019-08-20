@@ -500,14 +500,16 @@ void do_refresh_add() {
                         value_recv, value_sent, curproc->getVal()->pid, uid,
                         curproc->getVal()->devicename);
 
-    std::cout<<" name:"<<curproc->getVal()->name;
-    if(curproc->getVal()->cmdline){
-        std::cout<<" cmdline:"<<curproc->getVal()->cmdline;
-    }
 
-     std::cout<<" recv:"<<value_recv <<" send:"<<value_sent;
-     std::cout<<" pid:"<<curproc->getVal()->pid <<" uid:"<<uid;
-     std::cout<<" devicename:"<<curproc->getVal()->devicename<<std::endl;
+    if(curproc->getVal()->cmdline){
+        std::cout<<" name:"<<curproc->getVal()->name;
+        std::cout<<" cmdline:"<<curproc->getVal()->cmdline;
+        std::cout<<" recv:"<<value_recv <<" send:"<<value_sent;
+        std::cout<<" pid:"<<curproc->getVal()->pid <<" uid:"<<uid;
+        std::cout<<" devicename:"<<curproc->getVal()->devicename<<std::endl;
+
+
+    }
 
 
 

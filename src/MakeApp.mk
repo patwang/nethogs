@@ -28,13 +28,13 @@ install: nethogs
 uninstall:
 	rm $(DESTDIR)$(sbin)/nethogs || true
 
-nethogs: main.cpp nethogs.cpp $(OBJS) $(LIBS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) main.cpp $(OBJS) $(LIBS) -o nethogs -lpcap -lm ${NCURSES_LIBS} -DVERSION=\"$(VERSION)\"
+nethogs: main.cpp nethogs.cpp $(OBJS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) main.cpp $(OBJS) $(LIBS) -o nethogs  -lm ${NCURSES_LIBS} -DVERSION=\"$(VERSION)\"
 nethogs_testsum: nethogs_testsum.cpp $(OBJS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) nethogs_testsum.cpp $(OBJS) -o nethogs_testsum -lpcap -lm ${NCURSES_LIBS} -DVERSION=\"$(VERSION)\"
 
 decpcap_test: decpcap_test.cpp decpcap.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) decpcap_test.cpp decpcap.o -o decpcap_test -lpcap -lm
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) decpcap_test.cpp decpcap.o -o decpcap_test  $(LIBS) -lm
 
 #-lefence
 

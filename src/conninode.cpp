@@ -204,3 +204,10 @@ void refreshconninode() {
   // if (DEBUG)
   //	reviewUnknown();
 }
+
+void printConninode()
+{
+    for (std::map<std::string, unsigned long>::iterator ite =conninode.begin(); ite != conninode.end(); ite++){
+        std::cout<<ite->first <<" "<<ite->second<<std::endl;
+    }
+}

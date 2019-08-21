@@ -319,7 +319,7 @@ int main(int argc, char **argv) {
       last_refresh_time = now;
       if ((!DEBUG) && (!tracemode)) {
         // handle user input
-        ui_tick();
+        //ui_tick();
       }
       //do_refresh_add();
     }

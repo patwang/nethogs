@@ -21,7 +21,7 @@
  */
 
 #include <iostream>
-#include <ncurses.h>
+//#include <ncurses.h>
 #include <string>
 #include <strings.h>
 #if !defined(__APPLE__) && !defined(__FreeBSD__)

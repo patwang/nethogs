@@ -7,11 +7,11 @@ all: nethogs decpcap_test
 CFLAGS?=-Wall -Wextra
 CXXFLAGS?=-Wall -Wextra -Wno-missing-field-initializers
 
-OBJS=packet.o connection.o process.o decpcap.o cui.o inode2prog.o conninode.o devices.o
+OBJS=packet.o connection.o process.o decpcap.o inode2prog.o conninode.o devices.o
 
 NCURSES_LIBS?=-lncurses
 
-LIBS = /usr/lib/x86_64-linux-gnu/libpcap.a  /usr/lib/x86_64-linux-gnu/libncurses.a
+LIBS = /usr/lib/x86_64-linux-gnu/libpcap.a
 
 .PHONY: check uninstall
 check:
@@ -52,8 +52,8 @@ conninode.o: conninode.cpp nethogs.h conninode.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c conninode.cpp
 #devices.o: devices.cpp devices.h
 #	$(CXX) $(CXXFLAGS) -c devices.cpp
-cui.o: cui.cpp cui.h nethogs.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c cui.cpp -DVERSION=\"$(VERSION)\"
+#cui.o: cui.cpp cui.h nethogs.h
+#	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c cui.cpp -DVERSION=\"$(VERSION)\"
 
 TESTS=conninode_test
 

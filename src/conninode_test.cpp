@@ -4,7 +4,7 @@ local_addr *local_addrs = NULL;
 bool bughuntmode = false;
 
 int main() {
- /* if (!addprocinfo("testfiles/proc_net_tcp")) {
+  if (!addprocinfo("testfiles/proc_net_tcp")) {
     std::cerr << "Failed to load testfiles/proc_net_tcp" << std::endl;
     return 1;
   }
@@ -18,10 +18,10 @@ int main() {
     std::cerr << "Failed to load /proc/net/tcp" << std::endl;
     return 3;
   }
-#endif*/
+#endif
 
 
-  if (!addprocinfo("/proc/net/tcp")) {
+  /*if (!addprocinfo("/proc/net/tcp")) {
     std::cout << "Error: couldn't open /proc/net/tcp\n";
     exit(0);
   }
@@ -36,7 +36,7 @@ int main() {
     addprocinfo("/proc/net/udp6");
 
 
-    printConninode();
+    //printConninode();*/
 
   return 0;
 }

@@ -39,7 +39,7 @@ decpcap_test: decpcap_test.cpp decpcap.o
 #-lefence
 
 process.o: process.cpp process.h nethogs.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c process.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS)  $(LIBS) -c process.cpp
 packet.o: packet.cpp packet.h nethogs.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c packet.cpp
 connection.o: connection.cpp connection.h nethogs.h

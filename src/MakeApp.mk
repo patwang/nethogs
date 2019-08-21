@@ -11,7 +11,7 @@ OBJS=packet.o connection.o process.o decpcap.o inode2prog.o conninode.o devices.
 
 NCURSES_LIBS?=-lncurses
 
-LIBS = /usr/lib/x86_64-linux-gnu/libpcap.a -lstdc++ -lCXXABI  -GLIBCXX -lpthread -lm -fPIC
+LIBS = /usr/lib/x86_64-linux-gnu/libpcap.a -lstdc++ -lCXXABI  -GLIBC -lpthread -lm -fPIC
 
 .PHONY: check uninstall
 check:

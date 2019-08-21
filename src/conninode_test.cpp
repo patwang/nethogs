@@ -27,6 +27,7 @@ int main() {
   }
   addprocinfo("/proc/net/tcp6");
 
+    printConninode();
 
    if (!addprocinfo("/proc/net/udp")) {
       std::cout << "Error: couldn't open /proc/net/udp\n";
@@ -35,6 +36,7 @@ int main() {
     addprocinfo("/proc/net/udp6");
 
 
+    printConninode()
 
   return 0;
 }

@@ -192,6 +192,13 @@ void refreshconninode() {
     exit(0);
   }
   addprocinfo("/proc/net/tcp6");
+
+
+   if (!addprocinfo("/proc/net/udp")) {
+      std::cout << "Error: couldn't open /proc/net/udp\n";
+      exit(0);
+    }
+    addprocinfo("/proc/net/udp6");
 #endif
 
   // if (DEBUG)

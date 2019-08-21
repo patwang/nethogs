@@ -111,4 +111,8 @@ void quit_cb(int i);
 
 const char *getVersion();
 
+void write_to_log(const char* protocol,const char* hashstring,
+    const char* name, const char* cmdline, int pid,
+    unsigned long long times);
+
 #endif

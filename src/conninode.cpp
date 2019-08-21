@@ -204,7 +204,7 @@ void refreshconninode() {
   // if (DEBUG)
   //	reviewUnknown();
 
-  printConninode();
+  //printConninode();
 }
 
 void printConninode()

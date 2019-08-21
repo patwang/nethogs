@@ -155,26 +155,23 @@ int process_tcp(u_char *userdata, const dp_header *header,
     getProcess(connection, args->device);
 
     // 打印
-    std::cout<< " con == null tcp ip port:" <<packet->gethashstring();
-    unsigned long inode = conninode[connection->refpacket->gethashstring()];
+    char * name = NULL;
+    char *cmdline = NULL;
+    int pid=0 ;
+    unsigned long inode = conninode[packet->gethashstring()];
     Process *proc = findProcess(inode);
     if( proc ){
         if(proc->cmdline){
-            std::cout<<"cmdline;;"<<proc->cmdline;
+            cmdline = proc->cmdline;
         }
-        else{
-         std::cout<<"cmdline;; ";
-        }
-
-        std::cout<<" name;;"<<proc->name;
-        std::cout<<" pid;;"<<proc->pid ;
-        std::cout<<" devicename;;"<<proc->devicename;
-        std::cout<<" time:"<<connection->refpacket->time.tv_sec;
-         std::cout<<std::endl<<std::endl;
+        name = proc->name;
+        pid = proc->pid ;
     }
     else{
         std::cout<<"no proc"<<std::endl;
     }
+    write_to_log("tcp", packet->gethashstring(), proc->name, proc->cmdline, pid,  packet->time.tv_sec);
+
 
   }
   delete packet;
@@ -231,28 +228,25 @@ int process_udp(u_char *userdata, const dp_header *header,
     unknownudp->connections = new ConnList(connection, unknownudp->connections);
     getProcess(connection, args->device);
 
+
     // 打印
-        std::cout<< " con == null udp ip port:" <<packet->gethashstring();
-        unsigned long inode = conninode[connection->refpacket->gethashstring()];
-        std::cout<< "inode "<<inode << "  ";
+        char * name = NULL;
+        char *cmdline = NULL;
+        int pid=0 ;
+        unsigned long inode = conninode[packet->gethashstring()];
         Process *proc = findProcess(inode);
         if( proc ){
             if(proc->cmdline){
-                std::cout<<"cmdline;;"<<proc->cmdline;
+                cmdline = proc->cmdline;
             }
-            else{
-             std::cout<<"cmdline;; ";
-            }
-
-            std::cout<<" name;;"<<proc->name;
-            std::cout<<" pid;;"<<proc->pid ;
-            std::cout<<" devicename;;"<<proc->devicename;
-            std::cout<<" time:"<<connection->refpacket->time.tv_sec;;
-             std::cout<<std::endl<<std::endl;
+            name = proc->name;
+            pid = proc->pid ;
         }
         else{
             std::cout<<"no proc"<<std::endl;
         }
+        write_to_log("udp", packet->gethashstring(), proc->name, proc->cmdline, pid,  packet->time.tv_sec);
+
   }
   delete packet;
 
@@ -296,3 +290,33 @@ public:
   const char *devicename;
   handle *next;
 };
+
+void write_to_log(const char* protocol,const char* hashstring,
+    const char* name, const char* cmdline, int pid,
+    unsigned long long times){
+    if(protocol){
+        std::cout<<protocol<<"!!";
+    }else{
+        std::cout<<"!!";
+    }
+
+    if(hashstring){
+        std::cout<<hashstring<<"!!";
+    }else{
+        std::cout<<"!!";
+    }
+
+    if(name){
+        std::cout<<name<<"!!";
+    }else{
+        std::cout<<"!!";
+    }
+
+    if(cmdline){
+        std::cout<<cmdline<<"!!";
+    }else{
+        std::cout<<"!!";
+    }
+
+    std::cout<<pid<<"!!"<<times<<std::endl;
+}

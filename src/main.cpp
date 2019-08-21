@@ -71,7 +71,7 @@ void quit_cb(int /* i */) {
 
 void forceExit(bool success, const char *msg, ...) {
   if ((!tracemode) && (!DEBUG)) {
-    exit_ui();
+    //exit_ui();
   }
 
   va_list argp;

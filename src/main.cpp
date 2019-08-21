@@ -132,7 +132,7 @@ void clean_up() {
 
   procclean();
   if ((!tracemode) && (!DEBUG))
-    exit_ui();
+    //exit_ui();
 }
 
 int main(int argc, char **argv) {

@@ -321,7 +321,7 @@ int main(int argc, char **argv) {
         // handle user input
         ui_tick();
       }
-      do_refresh_add();
+      //do_refresh_add();
     }
 
     // if not packets, do a select() until next packet

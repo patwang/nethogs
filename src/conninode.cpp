@@ -203,6 +203,8 @@ void refreshconninode() {
 
   // if (DEBUG)
   //	reviewUnknown();
+
+  printConninode();
 }
 
 void printConninode()

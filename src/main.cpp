@@ -131,7 +131,7 @@ void clean_up() {
   }
 
   procclean();
-  if ((!tracemode) && (!DEBUG))
+  //if ((!tracemode) && (!DEBUG))
     //exit_ui();
 }
 

@@ -167,9 +167,7 @@ int process_tcp(u_char *userdata, const dp_header *header,
         name = proc->name;
         pid = proc->pid ;
     }
-    else{
-        std::cout<<"no proc"<<std::endl;
-    }
+
     write_to_log("tcp", packet->gethashstring(), name, cmdline, pid,  packet->time.tv_sec);
 
 
@@ -242,9 +240,7 @@ int process_udp(u_char *userdata, const dp_header *header,
             name = proc->name;
             pid = proc->pid ;
         }
-        else{
-            std::cout<<"no proc"<<std::endl;
-        }
+
         write_to_log("udp", packet->gethashstring(), name, cmdline, pid,  packet->time.tv_sec);
 
   }

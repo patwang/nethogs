@@ -11,7 +11,7 @@ OBJS=packet.o connection.o process.o decpcap.o inode2prog.o conninode.o devices.
 
 NCURSES_LIBS?=-lncurses
 
-LIBS = /usr/lib/x86_64-linux-gnu/libpcap.a -lstdc++ -lpthread -lm -fPIC
+LIBS = /usr/lib/x86_64-linux-gnu/libpcap.a -lstdc++ -lCXXABI  -GLIBCXX -lpthread -lm -fPIC
 
 .PHONY: check uninstall
 check:
@@ -39,7 +39,7 @@ decpcap_test: decpcap_test.cpp decpcap.o
 #-lefence
 
 process.o: process.cpp process.h nethogs.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS)  $(LIBS) -c process.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS)  -c process.cpp
 packet.o: packet.cpp packet.h nethogs.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c packet.cpp
 connection.o: connection.cpp connection.h nethogs.h

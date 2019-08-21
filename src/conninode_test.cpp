@@ -36,7 +36,7 @@ int main() {
     addprocinfo("/proc/net/udp6");
 
 
-    printConninode()
+    printConninode();
 
   return 0;
 }

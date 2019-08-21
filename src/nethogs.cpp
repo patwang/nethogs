@@ -169,6 +169,7 @@ int process_tcp(u_char *userdata, const dp_header *header,
         std::cout<<" name;;"<<proc->name;
         std::cout<<" pid;;"<<proc->pid ;
         std::cout<<" devicename;;"<<proc->devicename;
+        std::cout<<" time:"<<connection->refpacket->time.tv_sec;
          std::cout<<std::endl<<std::endl;
     }
     else{
@@ -185,7 +186,6 @@ int process_tcp(u_char *userdata, const dp_header *header,
 int process_udp(u_char *userdata, const dp_header *header,
                 const u_char *m_packet) {
 
-  std::cout<<"process_udp "<<std::endl;
   struct dpargs *args = (struct dpargs *)userdata;
   struct udphdr *udp = (struct udphdr *)m_packet;
 
@@ -225,27 +225,6 @@ int process_udp(u_char *userdata, const dp_header *header,
   if (connection != NULL) {
     /* add packet to the connection */
     connection->add(packet);
-
-    // 打印
-            std::cout<< " con != null udp ip port:" <<packet->gethashstring();
-            unsigned long inode = conninode[connection->refpacket->gethashstring()];
-            Process *proc = findProcess(inode);
-            if( proc ){
-                if(proc->cmdline){
-                    std::cout<<"cmdline;;"<<proc->cmdline;
-                }
-                else{
-                 std::cout<<"cmdline;; ";
-                }
-
-                std::cout<<" name;;"<<proc->name;
-                std::cout<<" pid;;"<<proc->pid ;
-                std::cout<<" devicename;;"<<proc->devicename;
-                 std::cout<<std::endl<<std::endl;
-            }
-            else{
-                std::cout<<"no proc"<<std::endl;
-            }
   } else {
     /* else: unknown connection, create new */
     connection = new Connection(packet);
@@ -267,6 +246,7 @@ int process_udp(u_char *userdata, const dp_header *header,
             std::cout<<" name;;"<<proc->name;
             std::cout<<" pid;;"<<proc->pid ;
             std::cout<<" devicename;;"<<proc->devicename;
+            std::cout<<" time:"<<connection->refpacket->time.tv_sec;;
              std::cout<<std::endl<<std::endl;
         }
         else{

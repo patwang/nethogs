@@ -7,11 +7,9 @@ all: nethogs decpcap_test
 CFLAGS?=-Wall -Wextra
 CXXFLAGS?=-Wall -Wextra -Wno-missing-field-initializers
 
-OBJS=packet.o connection.o process.o decpcap.o inode2prog.o conninode.o devices.o
+OBJS=packet.o connection.o process.o decpcap.o  inode2prog.o conninode.o devices.o
 
-NCURSES_LIBS?=-lncurses
-
-LIBS = /usr/lib/x86_64-linux-gnu/libpcap.a -lstdc++ -lCXXABI  -lpthread -lm -fPIC
+NCURSES_LIBS=
 
 .PHONY: check uninstall
 check:
@@ -29,23 +27,23 @@ uninstall:
 	rm $(DESTDIR)$(sbin)/nethogs || true
 
 nethogs: main.cpp nethogs.cpp $(OBJS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) main.cpp $(OBJS) $(LIBS) -o nethogs  -lm  -DVERSION=\"$(VERSION)\"
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) main.cpp $(OBJS) -o nethogs -lpcap -lm ${NCURSES_LIBS} -DVERSION=\"$(VERSION)\"
 nethogs_testsum: nethogs_testsum.cpp $(OBJS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) nethogs_testsum.cpp $(OBJS) -o nethogs_testsum -lpcap -lm -DVERSION=\"$(VERSION)\"
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) nethogs_testsum.cpp $(OBJS) -o nethogs_testsum -lpcap -lm ${NCURSES_LIBS} -DVERSION=\"$(VERSION)\"
 
 decpcap_test: decpcap_test.cpp decpcap.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) decpcap_test.cpp decpcap.o -o decpcap_test  $(LIBS) -lm
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) decpcap_test.cpp decpcap.o -o decpcap_test -lpcap -lm
 
 #-lefence
 
 process.o: process.cpp process.h nethogs.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS)  -c process.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c process.cpp
 packet.o: packet.cpp packet.h nethogs.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c packet.cpp
 connection.o: connection.cpp connection.h nethogs.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c connection.cpp
 decpcap.o: decpcap.c decpcap.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(LIBS) -c decpcap.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c decpcap.c
 inode2prog.o: inode2prog.cpp inode2prog.h nethogs.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c inode2prog.cpp
 conninode.o: conninode.cpp nethogs.h conninode.h

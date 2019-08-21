@@ -11,6 +11,8 @@ OBJS=packet.o connection.o process.o decpcap.o cui.o inode2prog.o conninode.o de
 
 NCURSES_LIBS?=-lncurses
 
+LIBS = /usr/lib/x86_64-linux-gnu/libpcap.a -lstdc++ -lpthread -lm -fPIC
+
 .PHONY: check uninstall
 check:
 	@echo "Not implemented"
@@ -26,7 +28,7 @@ install: nethogs
 uninstall:
 	rm $(DESTDIR)$(sbin)/nethogs || true
 
-nethogs: main.cpp nethogs.cpp $(OBJS)
+nethogs: main.cpp nethogs.cpp $(OBJS) $(LIBS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) main.cpp $(OBJS) -o nethogs -lpcap -lm ${NCURSES_LIBS} -DVERSION=\"$(VERSION)\"
 nethogs_testsum: nethogs_testsum.cpp $(OBJS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) nethogs_testsum.cpp $(OBJS) -o nethogs_testsum -lpcap -lm ${NCURSES_LIBS} -DVERSION=\"$(VERSION)\"
@@ -43,7 +45,7 @@ packet.o: packet.cpp packet.h nethogs.h
 connection.o: connection.cpp connection.h nethogs.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c connection.cpp
 decpcap.o: decpcap.c decpcap.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c decpcap.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LIBS) -c decpcap.c
 inode2prog.o: inode2prog.cpp inode2prog.h nethogs.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c inode2prog.cpp
 conninode.o: conninode.cpp nethogs.h conninode.h
